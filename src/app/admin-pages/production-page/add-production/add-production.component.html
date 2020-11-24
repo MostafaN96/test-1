@@ -1,0 +1,113 @@
+<section class="container mt-3">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <form [formGroup]="firstFormGroup">
+
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Select Plant</mat-label>
+                        <mat-select formControlName="plantId" required>
+                            <mat-option *ngFor="let item of resultPlant" [value]="item.id">
+                                {{item.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <mat-form-field class="w-100">
+                                <mat-label>Amount</mat-label>
+                                <input matInput placeholder="Amount" formControlName="amount" required>
+
+                                <mat-error *ngIf="firstFormGroup.get('amount').hasError('pattern')">
+                                    Only Numbers
+                                </mat-error>
+
+                                <mat-error *ngIf="firstFormGroup.get('amount').hasError('required')">
+                                    Required Field
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-6">
+                            <mat-form-field class="w-100">
+                                <mat-label>Selling Price</mat-label>
+                                <input matInput placeholder="selling Price" formControlName="sellingPrice" required>
+
+                                <mat-error *ngIf="firstFormGroup.get('sellingPrice').hasError('pattern')">
+                                    Only Numbers
+                                </mat-error>
+
+                                <mat-error *ngIf="firstFormGroup.get('sellingPrice').hasError('required')">
+                                    Required Field
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <!-- Mohamed hesham -->
+                    <button [disabled]="!firstFormGroup.valid" mat-button class="btn btnStyle w-50"
+                        href="#exampleModalCenterProduction" uk-toggle>Save</button>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- create modal -->
+    <div id="exampleModalCenterProduction" class="uk-flex-top " uk-modal>
+        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+
+            <div class="modal-header">
+                <h2 class="uk-modal-title">Add Production Services</h2>
+            </div>
+
+            <div class="uk-modal-body" uk-overflow-auto>
+                <p>Are you sure to add this Production ?</p>
+            </div>
+
+            <!-- <div class="modal-body"><label *ngIf="isCreated">{{standardCreated}}</label></div> -->
+            <div class="modal-footer">
+                <button type="submit" class="btn btnStyle mx-2" href="#modal-alert-create-production" uk-toggle
+                    (click)="addProduction()">
+                    Yes </button>
+                <button type="button" class="btn btnStyle2 uk-modal-close "> No </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- modal-alert-create -->
+    <div id="modal-alert-create-production" uk-sticky data-bg-close="false" data-esc-close="false" class="uk-flex-top "
+        uk-modal>
+        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title"><i class="fas fa-exclamation-triangle"></i> Alert</h2>
+            </div>
+
+            <div class="uk-modal-body text-center">
+                <!-- Mohamed hesham -->
+                <h3 class='responseMessage'>
+
+                </h3>
+            </div>
+
+            <div class="modal-footer">
+                <button *ngIf="successfullFlag" type="submit" class="btn btnStyle uk-modal-close" (click)="reload()">
+                    <!-- Mohamed hesham -->
+                    Ok
+                </button>
+
+                <button *ngIf="!successfullFlag" type="submit" class="btn btn-secondary uk-modal-close">
+                    Cancel
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- <pre>{{firstFormGroup.value | json}}</pre> -->
+
+
+</section>

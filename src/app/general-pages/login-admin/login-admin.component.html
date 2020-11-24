@@ -1,0 +1,84 @@
+<section class="login" id="login-section">
+    <div class="background-image">
+  
+      <!-- <div class="row arabicLanguage">
+        <div class="col-md-12">
+          <div class=" py-4 px-2">
+            <input class="uk-radio" type="radio"  name="arabicEnglishLang"  
+                 (click)="changeLanguageForm('English')" checked>
+                  <mat-label class="px-1"> {{englishLangLabel}}</mat-label>
+  
+                <input class="uk-radio" type="radio" name="arabicEnglishLang"  
+                (click)="changeLanguageForm('Arabic')" >
+                  <mat-label class="px-1"> {{arabicLangLabel}}</mat-label>
+          </div>
+        </div>
+      </div> -->
+      <!-- login form -->
+      <!-- <div class="login-form text-center container py-5 text-white"> -->
+          <div class="login-form text-center container text-white">
+        <div style="height: 240px;">
+          <h3>Login</h3>
+          <img src="../../assets/images/logo.png" class="img-fluid pb-2" width="500px" height="70px">
+
+        </div>
+        <div >
+          <form [formGroup]="mylogin" class="pt-2" novalidate>
+  
+  
+            <div>
+              <mat-form-field style="color: black" class="w-100">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Email" formControlName="email">
+  
+                <mat-error *ngIf="mylogin.get('email').hasError('pattern') && (mylogin.controls.email.dirty || mylogin.controls.email.touched)">
+                  Invalid Email try again!!
+                </mat-error>
+  
+                <mat-error *ngIf="mylogin.get('email').hasError('required') && (mylogin.controls.email.dirty || mylogin.controls.email.touched)">
+                    Required field
+                </mat-error>
+  
+              </mat-form-field>
+            </div>
+  
+            
+  
+            <br>
+  
+              <mat-form-field style="color: black" class="w-100" appearance="fill">
+                <mat-label>Password</mat-label>
+                <input type="password" matInput placeholder="Password" formControlName="password">
+  
+                <mat-icon matSuffix class="px-2 signIcon" style="cursor: pointer;" (click)="onSubmit()">vpn_key</mat-icon>
+  
+                <!-- In case there was a pattern for the password  OR when checking for the password availability -->
+                <mat-error *ngIf="mylogin.get('password').hasError('pattern') && (mylogin.controls.password.dirty || mylogin.controls.password.touched)">
+                  Invalid Password try again!!
+                </mat-error>
+  
+                <mat-error *ngIf="mylogin.get('password').hasError('required') && (mylogin.controls.password.dirty || mylogin.controls.password.touched)">
+                  Required field
+                </mat-error>
+  
+              </mat-form-field>
+  
+  
+           
+            <div *ngIf="!isLogin" class="row">
+              <div class="col-md-12">
+               <label class="text-danger">Invalid Email or Passowrd !!</label>
+              </div>
+  
+            </div>
+  
+            <div style="height: 100px;">
+
+            </div>
+  
+          </form>
+        </div>
+      </div>
+    </div>
+  
+  </section>

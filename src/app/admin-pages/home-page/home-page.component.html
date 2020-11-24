@@ -1,0 +1,51 @@
+<div class="svg">
+  <div class="links-container">
+    <ul class="grid-links">
+      <!-- <ng-container *ngFor="let quickAccess of quickAccessResult">
+          <li>
+            <a [routerLink]="[quickAccess.link]"><span id="reddit" class="{{quickAccess.icon}}"></span>
+            </a>
+            <div class="text-center uk-width-small">
+              <p style="font-size: 16px" *ngIf="isEnglish">{{quickAccess.service_description}}</p>
+              <p style="font-size: 16px" *ngIf="isArabic">{{quickAccess.service_description_ar}}</p>
+            </div>
+          </li>
+      </ng-container> -->
+     
+        <li>
+          <a [routerLink]="['plant']"><span id="reddit" class="fab fa-readme"></span>
+          </a>
+          <div class="text-center uk-width-small">
+            <p style="font-size: 16px">Add Plant</p>
+          </div>
+        </li>
+
+        <li>
+          <a [routerLink]="['acre']"><span id="reddit" class="fas fa-th-large"></span>
+          </a>
+          <div class="text-center uk-width-small">
+            <p style="font-size: 16px">Acre</p>
+          </div>
+        </li>
+
+        <li>
+          <a [routerLink]="['production']"><span id="reddit" class="fas fa-tasks"></span>
+          </a>
+          <div class="text-center uk-width-small">
+            <p style="font-size: 16px">Production</p>
+          </div>
+        </li>
+
+        <li>
+          <a [routerLink]="['worker']"><span id="reddit" class="fas fa-chalkboard-teacher"></span>
+          </a>
+          <div class="text-center uk-width-small">
+            <p style="font-size: 16px">Worker</p>
+          </div>
+        </li>
+        
+      
+    </ul>
+  </div>
+ 
+  </div>

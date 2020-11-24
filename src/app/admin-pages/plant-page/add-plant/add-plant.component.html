@@ -1,0 +1,351 @@
+<section class="container my-5" id="add-category">
+    <h2 class="text-center">Add Plant</h2>
+
+    <div class="container">
+
+          <mat-horizontal-stepper [linear]="!isLinear" #stepper errorMessage="blank is required.">
+                 <!-- ////////////////////// Step 1 -Plant- ////////////////////// -->
+            <mat-step [stepControl]="firstFormGroup">
+              <form [formGroup]="firstFormGroup">
+                <ng-template matStepLabel>Plant</ng-template>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div>
+
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Select Acre</mat-label>
+                                <mat-select formControlName="acreId" required>
+                                  <mat-option *ngFor="let item of resultAcre" [value]="item.id">
+                                    {{item.code}}
+                                  </mat-option>
+                                </mat-select>
+
+                                <mat-error *ngIf="firstFormGroup.get('acreId').hasError('required')">
+                                  Required Field
+                                </mat-error>
+                              </mat-form-field>
+                        </div>
+
+                        <mat-form-field class="w-100">
+                            <mat-label>Name</mat-label>
+                            <input matInput placeholder="Name" formControlName="name" required>
+
+                            <mat-error *ngIf="firstFormGroup.get('name').hasError('pattern')">
+                              Only alphanumeric characters, comma, fullstop and underscore allowed
+                          </mat-error>
+              
+                          <mat-error *ngIf="firstFormGroup.get('name').hasError('required')">
+                            Required Field
+                          </mat-error>
+                          </mat-form-field>
+                          <div class="row">
+                            <div class="col-6">
+                              <label>From</label>
+                            </div>
+                            <div class="col-6">
+                              <label>To</label>
+                            </div>
+                          </div>
+                              <div class="form-group hidden">
+                                <div class="input-group">
+                                  <input name="datepicker"
+                                         class="form-control" style="border: transparent;"
+                                         ngbDatepicker
+                                         #datepicker="ngbDatepicker"
+                                         [autoClose]="'outside'"
+                                         (dateSelect)="onDateSelection($event)"
+                                         [displayMonths]="2"
+                                         [dayTemplate]="t"
+                                         outsideDays="hidden"
+                                         [startDate]="fromDate!">
+                                  <ng-template #t let-date let-focused="focused">
+                                    <span class="custom-day"
+                                          [class.focused]="focused"
+                                          [class.range]="isRange(date)"
+                                          [class.faded]="isHovered(date) || isInside(date)"
+                                          (mouseenter)="hoveredDate = date"
+                                          (mouseleave)="hoveredDate = null">
+                                      {{ date.day }}
+                                    </span>
+                                  </ng-template>
+                                </div>
+                              </div>
+                              <div class="form-inline">
+                                  <div class="form-group">
+                                      <div class="input-group">
+                                        <input #startDate disabled
+                                               class="form-control" placeholder="yyyy-mm-dd"
+                                               name="startDate"
+                                               ng-model="startDate"
+                                               [value]="formatter.format(fromDate)"
+                                               (input)="fromDate = validateInput(fromDate, startDate.value)">
+                                        <div class="input-group-append">
+                                          <button class="btn btn-outline-secondary calendar btnStyle" (click)="datepicker.toggle()" type="button">
+                                            <i class="fas fa-calendar-alt"></i>
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="form-group ml-2">
+                                      <div class="input-group">
+                                        <input #endDate disabled
+                                               class="form-control" placeholder="yyyy-mm-dd"
+                                               name="endDate"
+                                               ng-model="endDate"
+                                               [value]="formatter.format(toDate)"
+                                               (input)="toDate = validateInput(toDate, endDate.value)">
+                                        <div class="input-group-append">
+                                          <!-- <button class="btn btn-outline-secondary calendar btnStyle" (click)="datepicker.toggle()" type="button"></button> -->
+                                        </div>
+                                      </div>
+                                    </div>
+                              </div>
+                    </div>
+                </div>
+               
+                    
+                    <div>
+                        <button class="btnStyle m-2" mat-button matStepperNext >Next</button>
+                      </div>
+              </form>
+            </mat-step>
+                         <!-- ////////////////////// Step 2 -Worker- ////////////////////// -->
+            <mat-step [stepControl]="secondFormGroup">
+              <form [formGroup]="secondFormGroup">
+                <ng-template matStepLabel>Worker</ng-template>
+                <!--  -->
+                
+                <mat-form-field class="w-100" hidden>
+                    <mat-label>Name</mat-label>
+                    <input matInput placeholder="workerObj" formControlName="workerObj" [(ngModel)]="selectWorker" required>
+                  </mat-form-field>
+
+                <div class="row">
+                    <div class="col-md-6">
+                      <mat-form-field class="w-100">
+                        <input matInput (keyup)="applyFilterWorker($event)" placeholder="Filter">
+                      </mat-form-field>
+                      
+                      <table mat-table [dataSource]="dataSourceWorker" class="mat-elevation-z8 w-100">
+          
+
+                        <ng-container matColumnDef="selectWorker">
+                          <th mat-header-cell *matHeaderCellDef> Select </th>
+                          <td mat-cell *matCellDef="let element">
+                           <mat-checkbox (change)="getSelectedWorker($event,element)"></mat-checkbox>
+          
+                          </td>
+                        </ng-container>
+          
+                        <ng-container matColumnDef="position">
+                          <th mat-header-cell *matHeaderCellDef> Position </th>
+                          <td mat-cell *matCellDef="let element">
+                            {{element.title}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="worker">
+                            <th mat-header-cell *matHeaderCellDef> Worker </th>
+                            <td mat-cell *matCellDef="let element">
+                              {{element.name}} </td>
+                          </ng-container>
+          
+                        <tr mat-header-row *matHeaderRowDef="displayedColumnsWorker"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumnsWorker;"></tr>
+                      </table>
+          
+                      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                    </div>
+
+                    <div class="col-md-6" style="padding-top: 4rem !important;">
+                        <div></div>
+                        <div style="height: 350px; overflow-y: auto;">
+                          <table class="uk-table uk-table-hover uk-table-divider uk-table-striped" >
+                            <thead>
+                                <tr style="background-color: #d34830;">
+                                    <th style="color: #fff ;">Position </th>
+                                    <th style="color: #fff ;">Name </th>
+  
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of selectedArrayValuesWorker">
+                                    <td *ngIf="data !== true">{{data.title}}</td>
+                                    <td *ngIf="data !== true">{{data.name}}</td>
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+                        </div>
+                   
+                      </div>
+
+                  </div> 
+
+
+                <!--  -->
+                <div>
+                  <button class="btnStyle2 m-2" mat-button matStepperPrevious>Back</button>
+                  <button class="btnStyle m-2" mat-button matStepperNext>Next</button>
+                </div>
+              </form>
+            </mat-step>
+                        <!-- ////////////////////// Step 3 -agricultural materials- ////////////////////// -->
+            <mat-step [stepControl]="ThirdFormGroup">
+                <form [formGroup]="ThirdFormGroup">
+                  <ng-template matStepLabel>Agricultural Materials</ng-template>
+                  <!--  -->
+                  
+                  <mat-form-field class="w-100" hidden>
+                      <mat-label>Name</mat-label>
+                      <input matInput placeholder="amObj" formControlName="amObj" [(ngModel)]="selectAM" required>
+                    </mat-form-field>
+  
+                  <div class="row w-100">
+                      <div class="col-md-6">
+                        <mat-form-field class="w-100">
+                          <input matInput (keyup)="applyFilterAM($event)" placeholder="Filter">
+                        </mat-form-field>
+                        
+                        <table mat-table [dataSource]="dataSourceAM" class="mat-elevation-z8 w-100">
+            
+  
+                          <ng-container matColumnDef="selectAM">
+                            <th mat-header-cell *matHeaderCellDef> Select </th>
+                            <td mat-cell *matCellDef="let element">
+                             <mat-checkbox (change)="getSelectedAM($event,element)"></mat-checkbox>
+            
+                            </td>
+                          </ng-container>
+            
+                          <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef> Name </th>
+                            <td mat-cell *matCellDef="let element">
+                              {{element.name}} </td>
+                          </ng-container>
+            
+                          <tr mat-header-row *matHeaderRowDef="displayedColumnsAM"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumnsAM;"></tr>
+                        </table>
+            
+                        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                      </div>
+  
+                      <div class="col-md-6" style="padding-top: 4rem !important;">
+                          <div></div>
+                          <div style="height: 300px; overflow-y: auto;">
+                          <table class="uk-table uk-table-hover uk-table-divider uk-table-striped">
+                            <thead>
+                                <tr style="background-color: #d34830;">
+                                    <th style="color: #fff ;">Name </th>
+                                    <th style="color: #fff ;">Amount(ton) </th>
+                                    <th style="color: #fff ;">Cost </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of selectedArrayValuesAM">
+                                    <td *ngIf="data !== true">{{data.name}}</td>
+                                    <td *ngIf="data !== true">
+                                      <input type="text" style="width: 100px;" (keyup)="amountFunc(data,$event)">
+                                    </td>
+                                    <td *ngIf="data !== true">
+                                      <input type="text" style="width: 100px;" (keyup)="costFunc(data,$event)">
+                                    </td>
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+                      </div>
+                        </div>
+  
+                    </div> 
+  
+  
+                  <!--  -->
+
+                  <div>
+                    <button class="btnStyle2 m-2" mat-button matStepperPrevious>Back</button>
+                    <button *ngIf="isEmpty" class="btnStyle m-2" mat-button matStepperNext>Next</button>
+                    <button *ngIf="!isEmpty" class="btn btnStyle m-2" (click)="requiredAttr()">Next</button>
+                    <div *ngIf="messAlert" class="uk-alert-danger" uk-alert>
+                      <a class="uk-alert-close"></a>
+                      <p>Please Complete all fields!!</p>
+                  </div>
+                  </div>
+                </form>
+              </mat-step>
+
+            <mat-step>
+              <ng-template matStepLabel>Done</ng-template>
+              <p>You are now done.</p>
+              <div>
+                <button class="btnStyle2 m-2" mat-button matStepperPrevious >Back</button>
+                <button *ngIf="isEmpty" mat-button class="btn btnStyle" href="#exampleModalCenterPlant" uk-toggle>Save</button>
+                <button *ngIf="!isEmpty" class="btn btnStyle m-2" (click)="requiredAttr()">Save</button>
+                <div *ngIf="messAlert" class="uk-alert-danger" uk-alert>
+                  <a class="uk-alert-close"></a>
+                  <p>Please Complete all fields!!</p>
+              </div>
+              </div>
+            </mat-step>
+          </mat-horizontal-stepper>
+          
+        
+    </div>
+
+
+    <!-- create modal -->
+    <div id="exampleModalCenterPlant" class="uk-flex-top " uk-modal>
+        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+
+            <div class="modal-header">
+                <h2 class="uk-modal-title">Add Plant Services</h2>
+            </div>
+
+            <div  class="uk-modal-body"  uk-overflow-auto >
+                <p>Are you sure to add this Plant ?</p>
+            </div>
+
+            <!-- <div class="modal-body"><label *ngIf="isCreated">{{standardCreated}}</label></div> -->
+            <div class="modal-footer">
+                <button type="submit" class="btn btnStyle mx-2" href="#modal-alert-create-plant" uk-toggle (click)="addPlant()">
+      Yes </button>
+                <button type="button" class="btn btnStyle2 uk-modal-close "> No </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- modal-alert-create -->
+    <div id="modal-alert-create-plant" class="uk-flex-top " uk-sticky data-bg-close="false" data-esc-close="false" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title"><i class="fas fa-exclamation-triangle"></i> Alert</h2>
+            </div>
+
+            <div class="uk-modal-body text-center">
+                <h3 class='responseMessage'>
+
+                </h3>
+            </div>
+
+            <div class="modal-footer">
+                <button *ngIf="successfullFlag" type="submit" class="btn btnStyle uk-modal-close" (click)="reload()">
+      Ok
+    </button>
+
+                <button *ngIf="!successfullFlag" type="submit" class="btn btn-secondary uk-modal-close">
+      Cancel
+    </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- <pre>{{firstFormGroup.value | json}}</pre> -->
+
+    <!-- <pre>{{secondFormGroup.value | json}}</pre> -->
+
+    <!-- <pre>{{ThirdFormGroup.value | json}}</pre> -->
+
+
+</section>

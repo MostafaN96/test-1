@@ -1,0 +1,161 @@
+.svg {
+    font-family: "Lato";
+    overflow: hidden;
+    background-image: url("../../../assets/images/bg.jpg");
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    background-attachment: fixed;
+  }
+  
+  .links-container {
+    width: 100%;
+    margin: 80px auto;
+  }
+  
+  /* .footer {
+    width: 100%;
+    margin: 100px auto;
+  } */
+  
+  .license {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+  }
+  
+  .license > li > a {
+    position: relative;
+    margin-top: -25px;
+    display: inline-block;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    color: #d34830;
+    -webkit-transition: 1s;
+    transition: 1s;
+  }
+  
+  .license > li > a:hover {
+    letter-spacing: .25em;
+    color: #1B1725;
+    text-shadow: 3px 3px 3px #d34830;
+    -webkit-transition: .3s;
+    transition: .3s;
+  }
+  
+  .grid-links {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .grid-links > li {
+    position: relative;
+    display: inline-block;
+    padding: 20px 90px;
+    -webkit-transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
+  }
+  
+  .grid-links > li a {
+    position: relative;
+    text-decoration: none;
+    background: #1B1725;
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+    border-radius: 25%;
+    -webkit-transition: .3s ease-out;
+    transition: .3s ease-out;
+    font-size: 4.2rem;
+    color: #d34830;
+  }
+  
+  .grid-links > li a:hover {
+    border-radius: 50%;
+    background-color: transparent;
+    -webkit-transition: .3s ease;
+    transition: .3s ease;
+    -webkit-transform: rotate(-8deg);
+    transform: rotate(-8deg);
+    transform: scale(2,2);
+    color: rgb(0, 0, 0);
+  }
+  p{
+      font-family: "segoe ui light";
+      font-size: 20px;
+      font-weight: bold;
+      color: #BCBCBC !important;
+  }
+  .grid-links > li a span {
+    font-size: 2.5em;
+    line-height: 80px;
+    color: #E9E9E9;
+  }
+  
+  .grid-links > li a > span {
+    -webkit-transition: .3s ease-out;
+    transition: .3s ease-out;
+    margin: 10%;
+  
+  }
+  
+  .grid-links > li a:hover > span {
+    color: #1B1725;
+    -webkit-transition: .3s ease;
+    transition: .3s ease;
+  
+  }
+  .grid-links > li a:hover >p{
+      color: #d34830;
+      transition: .3s ease;
+  }
+  /* RESPONSIVE LAYOUT BIZ */
+  
+  @media screen and (max-width: 1382px) {
+    .grid-links > li {
+      position: relative;
+      display: inline-block;
+      padding: 50px;
+      -webkit-transition: 0.5s;
+      transition: 0.5s;
+    }
+  }
+  
+  @media screen and (max-width: 992px) {
+    .grid-links > li {
+      position: relative;
+      display: inline-block;
+      padding: 35px;
+      -webkit-transition: 0.5s;
+      transition: 0.5s;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .grid-links > li {
+      position: relative;
+      display: inline-block;
+      padding: 18px;
+      -webkit-transition: 0.5s;
+      transition: 0.5s;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .grid-links > li {
+      position: relative;
+      display: inline-block;
+      padding: 10px;
+      -webkit-transition: 0.5s;
+      transition: 0.5s;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .grid-links > li {
+      position: relative;
+      display: inline-block;
+      padding: 10px;
+      -webkit-transition: 0.5s;
+      transition: 0.5s;
+    }
+  }

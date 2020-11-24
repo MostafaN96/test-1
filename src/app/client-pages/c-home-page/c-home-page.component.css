@@ -1,0 +1,11 @@
+.content {
+        border-radius: 30px;
+        padding: 0px 22px;
+            padding-bottom: 0px;
+        min-height: 100vh;
+        --bg-opacity: 1;
+        background-color: #F1F5F8;
+        background-color: rgba(241, 245, 248, var(--bg-opacity));
+        flex: 1 1 0%;
+        padding-bottom: 2.5rem;
+    }

@@ -1,0 +1,161 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* This Lines With Create Project !!Dont Delete!! */
+html, body { height: 100%; } 
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* -------------------------------------------------------------------- */
+
+/* // Shared CSS // */
+
+/* Buttons */
+.btnStyle {
+    background-color: #d34830 !important;
+    color: #fff !important;
+    transition: all 0.5s;
+  }
+  
+  .btnStyle:hover {
+    background-color: #fff !important;
+    color: #263b42c7 !important;
+    transition: all 0.5s;
+    box-shadow: 5px 10px 22px grey;
+  }
+
+  .btnStyle2 {
+    background-color: #263b42c7 !important;
+    color: #fff !important;
+    transition: all 0.5s;
+  }
+  
+  .btnStyle2:hover {
+    background-color: #fff !important;
+    color: #263b42c7 !important;
+    transition: all 0.5s;
+    box-shadow: 5px 10px 22px grey;
+  }
+
+  /* Icons  */
+
+.updateStyle {
+  color: #d34830;
+  font-size: 17px !important;
+  transition: all 0.4s;
+}
+
+.updateStyle:hover {
+  color: #000000;
+}
+
+.deleteStyle {
+  font-size: 20px;
+  transition: all 0.4s;
+  color: #d34830 !important;
+}
+
+.deleteStyle:hover {
+  color: #000000 !important;
+}
+
+.restoreStyle {
+  font-size: 20px;
+  transition: all 0.4s;
+  color: #d34830 !important;
+}
+
+.restoreStyle:hover {
+  color: #000000 !important;
+}
+  /* //////////////// */
+
+  /* DatePicker Style */
+  .form-group.hidden {
+    width: 0;
+    margin: 0;
+    border: none;
+    padding: 0;
+    z-index: 99;
+    position: fixed;
+    margin-left: -23px;
+    top: 38px;
+  }
+  .custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+  }
+  .custom-day.focused {
+    background-color: #e6e6e6;
+  }
+  .custom-day.range, .custom-day:hover {
+    background-color: rgb(2, 117, 216);
+    color: white;
+  }
+  .custom-day.faded {
+    background-color: rgba(2, 117, 216, 0.5);
+  }
+  /* //////////////////// */
+
+  /* Navbar Pages */
+  .navbar{
+    /* border-radius: 10px; */
+      border-radius: 5px;
+      font-family: "segoe ui light";
+      background-color:#fff !important;
+      border: solid 2px #263b42c7;
+      box-shadow: 0px 7px 5px -4px #253a42c7;
+    /* margin-bottom: 5px; */
+  }
+  
+  .navbar-light .navbar-nav .nav-link {
+   color:#d34830 !important;
+   }
+   .navbar-light .navbar-nav .nav-link:hover{
+     color:  #263b42c7 !important;
+     }
+   .navbar ul li label
+   {
+     cursor: pointer;
+   }
+    
+   .nav-link
+   {
+     transition: all 0.4s;
+     font-size: 17px;
+   }
+
+   /* //////////////////// */
+
+
+   /* ToolBar in Show All Pages */
+   .toolsbar {
+    border-radius: 5px;
+    padding: 10px;
+    border: 2px solid #263b42c7;
+    box-shadow: 0px 7px 5px -4px #253a42c7;
+  }
+
+
+  /* ----Reports Style---- */
+  
+.reportBorder
+{
+  border: 1px solid black;
+  text-align: center;
+}
+
+.reportBorderOnly
+{
+  border: 1px solid black;
+}
+
+.reportBackgroundColor
+{
+  background-color: #a71d1d;
+}
+
+.reportColor
+{
+  color: white !important;
+}

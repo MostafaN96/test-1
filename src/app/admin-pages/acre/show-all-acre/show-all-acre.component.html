@@ -1,0 +1,191 @@
+<section class="container" id="show-all-acre">
+    <!-- //////////////////////////////////////////////////////////// -->
+
+    <div class="toolsbar">
+        <a href="#modal-center-delete-acre" class="px-3" uk-toggle>
+            <i class="fas fa-trash deleteStyle"></i>
+        </a>
+    </div>
+
+    <!-- This is the Search Angular Material Tabel -->
+    <div class="w-100">
+        <mat-form-field class="w-100">
+            <input matInput [(ngModel)]="filter" (keyup)="applyFilter($event.target.value)" placeholder="Search">
+        </mat-form-field>
+        <div>
+            <table mat-table matSort [dataSource]="dataSourceSearchTabel" class="mat-elevation-z8 w-100">
+
+                <!-- Checkbox Column -->
+                <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" (change)="selectAllSrarchTabel(selection.selected)">
+                        </mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        <mat-checkbox (click)="selectUnsSelectArray(row)" (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+                        </mat-checkbox>
+                    </td>
+                </ng-container>
+
+                <!-- Acre Code Column -->
+                <ng-container matColumnDef="code">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Acre Code </th>
+                    <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+                </ng-container>
+
+                <!-- Update Column -->
+                <ng-container matColumnDef="update">
+                    <th mat-header-cell *matHeaderCellDef>
+                        Update
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        <a (click)="getindexSearchTabel(row)">
+                            <i class="fas fa-edit updateStyle" href="#modal-container-acre" uk-toggle></i>
+                        </a>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+
+    <!-- ////////////////////////////////////////////////////////////////// -->
+
+    <div>
+        <!-- ////////////////////////////////////////////////  UPDATE  ///////// /////////////////////////////////////// -->
+        <div id="modal-container-acre" class="uk-modal-container" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body">
+                <button class="uk-modal-close-default" type="button" uk-close></button>
+
+                <form [formGroup]="myform" class="container py-3" novalidate>
+
+                    <div>
+                        <h2 class="py-3 text-center"> Acre</h2>
+                        <h5 class="mt-4">Update Form</h5>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="w-100">
+                                <mat-label> Acre Code</mat-label>
+                                <input matInput placeholder="ex. Acre Code" formControlName="updateCode">
+
+                                <mat-error *ngIf="myform.get('updateCode').hasError('required')">
+                                    Required Field
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <a id="btn" href="#modal-center-acre" class="btn  btnStyle w-25 mt-3" uk-toggle>
+            Save
+          </a>
+
+                    <!-- update Confirmation modal -->
+                    <div id="modal-center-acre" class="uk-flex-top " uk-modal>
+                        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                            <button class="uk-modal-close-default" type="button" uk-close></button>
+                            <div class="uk-modal-header">
+                                <h2 class="uk-modal-title">Update  Acre</h2>
+                            </div>
+                            <div  class="uk-modal-body"  uk-overflow-auto >
+                                <p>Are you sure to update this Acre ?</p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn  btnStyle  mx-2" data-dismiss="modal" href="#modal-alert-update-acre" uk-toggle type="button" (click)="updateAcre()">
+                  Yes
+                </button>
+                                <button class="btn btn-secondary  uk-modal-close " type="button">No</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- modal-alert-update -->
+                    <div id="modal-alert-update-acre" class="uk-flex-top" uk-sticky data-bg-close="false" data-esc-close="false" uk-modal>
+                        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                            <!-- <button class="uk-modal-close-default" type="button" uk-close></button> -->
+                            <div class="uk-modal-header">
+                                <h2 class="uk-modal-title"><i class="fas fa-exclamation-triangle"></i> Alert</h2>
+                            </div>
+
+                            <div class="uk-modal-body text-center">
+                                <h3 class='responseMessageUpdate'>
+
+                                </h3>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button *ngIf="successfullFlag" type="submit" class="btn btnStyle uk-modal-close" data-dismiss="modal" (click)="reload()">
+                  Ok
+                </button>
+
+                                <button *ngIf="!successfullFlag" type="submit" class="btn btn-secondary uk-modal-close" data-dismiss="modal">
+                  Cancel
+                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- ////////////////////////////////////////////////  DELETE  //////////////////////////////////////////////// -->
+                    <!-- This is the delete modal -->
+                    <div id="modal-center-delete-acre" class="uk-flex-top " uk-modal>
+                        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                            <button class="uk-modal-close-default" type="button" uk-close></button>
+                            <div class="uk-modal-header">
+                                <h2 class="uk-modal-title">Delete Acre</h2>
+                            </div>
+
+                            <div  class="uk-modal-body"  uk-overflow-auto >
+                                <p>Are you sure to delete these Acres ?</p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn btnStyle uk-modal-close mx-2" data-dismiss="modal" href="#modal-alert-delete-acre" uk-toggle type="button" (click)="deleteAcre()">
+                  Yes
+                </button>
+
+                                <button class="btn btn-secondary uk-modal-close " type="button">No</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- modal-alert-delete -->
+                    <div id="modal-alert-delete-acre" class="uk-flex-top" uk-sticky data-bg-close="false" data-esc-close="false" uk-modal>
+                        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+
+                            <div class="uk-modal-header">
+                                <h2 class="uk-modal-title"><i class="fas fa-exclamation-triangle"></i> Alter</h2>
+                            </div>
+
+                            <div class="uk-modal-body text-center">
+                                <h3 class='responseMessageDelete'>
+
+                                </h3>
+                                <div class="modal-footer">
+                                    <button *ngIf="successfullFlag" type="submit" class="btn btnStyle uk-modal-close" data-dismiss="modal" (click)="reload()">
+                    Ok
+                  </button>
+
+                                    <button *ngIf="!successfullFlag" type="submit" class="btn btn-secondary uk-modal-close" data-dismiss="modal">
+                    Cancel
+                  </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>

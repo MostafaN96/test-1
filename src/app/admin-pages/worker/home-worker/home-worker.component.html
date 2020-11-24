@@ -1,0 +1,38 @@
+<div class="container" id="navbar-worker">
+
+    <h2   class="text-center">Worker</h2>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+      
+            <li  class="nav-item">
+              <div *ngIf="createShowHide">
+                <a class="nav-link mx-2" [routerLink]="['addWorker']">
+    
+                  <label > <i class="fas fa-plus-circle"></i> Add</label>
+    
+                </a>
+              </div>
+            </li>
+            <li *ngIf="showShowAllLink" class="nav-item">
+              <a class="nav-link mx-2" [routerLink]="['showAllWorker']">
+                <label > <i class="fas fa-list-ul"></i> ShowAll </label> 
+              </a>
+            </li>
+    
+            <li *ngIf="showRestoreLink" class="nav-item">
+              <a class="nav-link mx-2" [routerLink]="['restoreWorker']">
+                <label> <i class="fas fa-list-ul"></i> Restore</label>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    
+    <router-outlet></router-outlet>

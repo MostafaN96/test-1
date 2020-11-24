@@ -1,0 +1,71 @@
+<section class="container my-3" id="add-agriculturalMaterials">  
+    <div class="container">
+        <form [formGroup]="myForm">
+  
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field style="color: black" class="w-100">
+                        <mat-label> Agricultural Materials Name</mat-label>
+                        <input matInput placeholder="ex. Agricultural Materials Name" formControlName="name">  
+                        <mat-error *ngIf="myForm.get('name').hasError('required')">
+                            Required Field
+                        </mat-error>
+  
+                    </mat-form-field>
+                </div>
+            </div>
+  
+        </form>
+  
+        <div class="sub-section mb-5">
+            <button [disabled]="!myForm.valid" type="submit" class="btn btnStyle w-25 mt-3" href="#exampleModalCenterAgriculturalMaterials" uk-toggle>
+        Save </button>
+  
+            <div id="exampleModalCenterAgriculturalMaterials" class="uk-flex-top " uk-modal>
+                <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                    <div class="modal-header">
+                        <h2 class="uk-modal-title">Add Agricultural Materials </h2>
+                    </div>
+  
+                    <div  class="uk-modal-body"  uk-overflow-auto >
+                        <p>Are you sure to add this Agricultural Materials ?</p>
+                    </div>
+  
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btnStyle mx-2" href="#modal-alert-create-agriculturalMaterials" uk-toggle (click)="addAgriculturalMaterials()">
+              Yes </button>
+                        <button type="button" class="btn btn-secondary uk-modal-close "> No </button>
+  
+                    </div>
+                </div>
+            </div>
+  
+            <!-- modal-alert-create -->
+            <div id="modal-alert-create-agriculturalMaterials" class="uk-flex-top " class="uk-flex-top " uk-sticky data-bg-close="false" data-esc-close="false"  uk-modal>
+                <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                    <div class="uk-modal-header">
+                        <h2 class="uk-modal-title"><i class="fas fa-exclamation-triangle"></i> Alert</h2>
+                    </div>
+  
+                    <div class="uk-modal-body text-center">
+                        <h3 class='responseMessage'>
+  
+                        </h3>
+                    </div>
+  
+                    <div class="modal-footer">
+                        <button *ngIf="successfullFlag" type="submit" class="btn btnStyle uk-modal-close" (click)="reload()">
+              Ok
+            </button>
+  
+                        <button *ngIf="!successfullFlag" type="submit" class="btn btn-secondary uk-modal-close">
+              Cancel
+            </button>
+                    </div>
+  
+                </div>
+            </div>
+        </div>
+    </div>
+    
+  </section>

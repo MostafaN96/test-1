@@ -1,0 +1,252 @@
+<section class='navbar-section pb-5'>
+
+	<div class="parent-navbar  fixed-top" style="z-index: 998">
+		<div class="child-navbar align-items-center px-3">
+			<div class="row no-gutters">
+				<div class="col-6">
+					<div class="row no-gutters">
+						<div class="col-1">
+							<div class="ch2 d-flex justify-content-start mt-1 ">
+								<div id="nav-icon3">
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-2">
+							<div class="ch1 d-flex justify-content-start">
+								<a class="" [routerLink]="['/Dashboard']">
+									<img class="img-fluid" width="80px" height="30px"
+										src="../../../assets/images/logo.png">
+								</a>
+							</div>
+						</div>
+
+						<!-- <div class="col-9 d-flex justify-content-start">
+						<div class="language-section mx-3">
+
+							<a (click)="clickChangeLanguage()">
+								<img class="img-fluid" style="width: 25px; height: 25px;" src="../../../assets/images/egypt.png">
+								<a style="text-decoration: none;" class="itemHover px-1">العربية</a>
+							</a>
+
+							<a (click)="clickChangeLanguage()">
+								<img class="img-fluid" style="width: 25px; height: 25px;" src="../../../assets/images/english-language.png">
+								<a style="text-decoration: none;" class="itemHover px-1">English</a>
+							</a>
+						</div>
+					</div> -->
+					</div>
+				</div>
+
+				<div class="col-6">
+					<div class="row no-gutters">
+
+						<div class="col-10">
+							<div class=" d-flex justify-content-end mx-3">
+								<!-- <a class="bell" style="font-size: 25px;">
+									<i style="font-size: 20px;" class="far fa-bell itemHover"></i>
+								</a> -->
+								<!-- <a style="font-size: 25px;" data-toggle="tooltip" data-placement="bottom" title="{{jobDescriptionLabel}}"  >
+									<i href="#modal-container-jobDescription " uk-toggle style="font-size: 20px;" class="fas fa-scroll itemHover px-2"></i>
+								</a> -->
+							</div>
+						</div>
+
+
+
+						<div class="col-2">
+							<div class="d-flex justify-content-end  mt-1">
+								<a class="color-a logoutLable" [routerLink]="['']" (click)="logout()">
+									<i class=" fas fa-door-open"></i>
+									Logout
+								</a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+
+
+		</div>
+
+
+	</div>
+
+
+	<!-- // Notification Shape -->
+	<div id="notification-section-id" class="notification-section">
+		<div class="notification-parent">
+			<div class="notification-parent-header">
+				<!-- <label>{{notificationsHeaderTitle}}</label> -->
+				<a style="color: #ff7788;" [routerLink]="['myNotifications']">
+					{{notificationsHeaderTitle}}</a>
+			</div>
+
+			<div class="notification-body">
+				<!-- <div class="notification-child"  *ngFor="let noti of notiResult"> -->
+					<div class="notification-child"  *ngFor="let noti of notiResult">
+
+			  <label>
+				<a (click)="getLink(noti.link)" >
+					{{noti.notification_description_english}}
+
+				</a>
+			  
+			  </label>
+
+			  <label *ngIf="isArabic">
+				<a (click)="getLink(noti.link)">
+					{{noti.notification_description_Arabic}}
+
+				</a>
+			  
+			  </label>
+
+			</div>
+			</div>
+
+			<div class="notification-footer">
+				<label></label>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- //////////////////////////////////////// -->
+
+	<div class="page-navbar " id="page-navbar-id" style="font-size: 20px">
+		<div class="row no-gutters">
+
+			<div class="col-3">
+				<div class="title-column text-center mt-2">
+					<div class="titleLabel titleLabel1">
+						<label class="colorTitle titlePreparation clicked-color" style="cursor: pointer"
+							(click)="showHideItem('.preparation','.titlePreparation')">Preparation</label>
+					</div>
+
+					<div class="titleLabel titleLabel1">
+						<label class="colorTitle titleSettings" style="cursor: pointer"
+							(click)="showHideItem('.settings','.titleSettings')">Settings</label>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-9" style="background-color:#333 ">
+				<div class="row no-gutters text-center" style="background-color: #252525">
+					<div id="content-menu" class="col-2 backgroundMenu1">
+						<a class="colorMenu1" style="font-size: 15px; color: #d3531a"
+							(click)="menuOption('main')">Main</a>
+					</div>
+
+					<div id="content-report" class="col-2 backgroundMenu2">
+						<a class="colorMenu2" style="font-size: 15px" (click)="menuOption('report')">Reports</a>
+					</div>
+				</div>
+
+				<div class="row" *ngIf="mainMenuFlag">
+					<div class="col-md-12 mb-4">
+						<div class="mt-3 mx-5 listChange">
+							<div style="border-bottom: #444 1px solid;">
+								<label>Content Module</label>
+							</div>
+							<ul class="content-menu">
+								<li class="preparation hide-item show-hide-item">
+									<a class="btn mx-2" [routerLink]="['position']"> &nbsp;
+										Position
+									</a>
+								</li>
+
+								<li class="preparation hide-item show-hide-item">
+									<a class="btn mx-2" [routerLink]="['worker']"> &nbsp;
+										Worker
+									</a>
+								</li>
+
+								<li class="preparation hide-item show-hide-item">
+									<a class="btn mx-2" [routerLink]="['acre']"> &nbsp;
+										Acre
+									</a>
+								</li>
+
+								<li class="preparation hide-item show-hide-item">
+									<a class="btn mx-2" [routerLink]="['agriculturalMaterials']"> &nbsp;
+										Agricultural Materials
+									</a>
+								</li>
+
+								<li class="preparation hide-item show-hide-item">
+									<a class="btn mx-2" [routerLink]="['plant']"> &nbsp;
+										Add Plant
+									</a>
+								</li>
+
+								<li class="preparation hide-item show-hide-item">
+									<a class="btn mx-2" [routerLink]="['production']"> &nbsp;
+										Production
+									</a>
+								</li>
+
+								
+
+								
+
+								
+
+								
+
+								<li class="settings hide-item">
+									<a class="btn mx-2" [routerLink]="['plant']"> &nbsp;
+										Set 1
+									</a>
+								</li>
+
+								<li class="settings hide-item">
+									<a class="btn mx-2" [routerLink]="['production']"> &nbsp;
+										Set 2
+									</a>
+								</li>
+
+							</ul>
+						</div>
+
+					</div>
+
+					<!-- <div class="col-md-6">
+
+				</div> -->
+
+				</div>
+
+
+
+				<div class="row" *ngIf="reportMenuFlag">
+					<div class="col-md-12 ">
+						<div class="mt-3 mx-5 listChange">
+							<div style="border-bottom: #444 1px solid;">
+								<label>Reports</label>
+							</div>
+							<ul>
+								<li>
+									<a class="btn mx-2" [routerLink]="['report/plant']">
+										Plant Report
+									</a>
+								</li>
+
+							</ul>
+						</div>
+					</div>
+					<!-- <div class="col-md-6">
+	
+					</div> -->
+
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

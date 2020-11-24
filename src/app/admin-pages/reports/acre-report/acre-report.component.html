@@ -1,0 +1,156 @@
+<section class="container my-3">
+    <h2 class="text-center">Plant Report</h2>
+
+    <div>
+        <!-- <table border=1 class="uk-table uk-table-hover uk-table-divider ">
+            <thead>
+                <tr>
+                    <th class="reportBorder reportBackgroundColor reportColor" colspan="2" rowspan="2">Acre</th>
+                    <th class="reportBorder reportBackgroundColor reportColor text-center" colspan="8">Plant</th>
+                </tr>
+                <tr>
+                    <td class="reportBorder reportBackgroundColor reportColor">Name</td>
+                    <td class="reportBorder reportBackgroundColor reportColor">Start Date</td>
+                    <td class="reportBorder reportBackgroundColor reportColor">End Date</td>
+                    <td class="reportBorder reportBackgroundColor reportColor">Produced Quantity</td>
+                    <td class="reportBorder reportBackgroundColor reportColor">Selling Price</td>
+                    <td class="reportBorder reportBackgroundColor reportColor">Costs</td>
+                    <td class="reportBorder reportBackgroundColor reportColor uk-table-expand">Worker</td>
+                    <td class="reportBorder reportBackgroundColor reportColor">Agricultural Material </td>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let arce of resultPlant">
+                    <td colspan="2">{{arce.arceCode}}</td>
+                    <ng-container *ngFor="let plant of arce.plansArray">
+                        <td>{{plant.planName}}</td>
+                        <td>{{plant.planStartDate}}</td>
+                        <td>{{plant.planEndDate}}</td>
+                        <td>{{plant.planAmount}}</td>
+                        <td>{{plant.planSellingPrice}}</td>
+                        <td>{{plant.materialCost}}</td>
+                            <td>
+                                    <ul >
+                                        <li *ngFor="let worker of plant.workersArray">
+                                            {{worker.title}} {{worker.name}} {{worker.salary_by_day}}
+                                        </li>
+                                    </ul>
+                             </td>
+                                <td>
+                                    <ul>
+                                        <li *ngFor="let material of plant.materialArray">
+                                            {{material.name}} {{material.amount}} {{material.cost}}
+                                        </li>
+                                    </ul>
+                                </td>
+                    </ng-container>
+                </tr>
+            </tbody>
+        </table> -->
+
+       <!--  <div>
+           <a class="px-3" (click)="reload()">
+                <i class="fas fa-sync-alt restoreStyle"> </i>
+            </a>
+            Reload Data 
+        </div>-->
+
+        <table border=1 class="uk-table uk-table-hover uk-table-divider ">
+            <thead>
+                <tr>
+                    <th colspan="2" rowspan="3" class="reportBorder reportBackgroundColor reportColor virtical-align" >Acre</th>
+                    <th colspan="10" class="reportBorder reportBackgroundColor reportColor text-center" colspan="13">
+                        Plant</th>
+                </tr>
+                <tr>
+                    <td rowspan="2" class="reportBorder reportBackgroundColor reportColor virtical-align">Name</td>
+                    <td rowspan="2" class="reportBorder reportBackgroundColor reportColor virtical-align">Start Date</td>
+                    <td rowspan="2" class="reportBorder reportBackgroundColor reportColor virtical-align">End Date</td>
+                    <td rowspan="2" class="reportBorder reportBackgroundColor reportColor virtical-align">Produced Quantity
+                    </td>
+                    <td rowspan="2" class="reportBorder reportBackgroundColor reportColor virtical-align">Selling Price
+                    </td>
+                    <td rowspan="2" class="reportBorder reportBackgroundColor reportColor virtical-align">Costs</td>
+                    <td rowspan="2" class="reportBorder reportBackgroundColor reportColor virtical-align">Total Costs</td>
+                    <td colspan="3" class="reportBorder reportBackgroundColor reportColor uk-table-expand" >
+                        Worker</td>
+                    <td colspan="3" class="reportBorder reportBackgroundColor reportColor text-center">
+                        Agricutural Material</td>
+                </tr>
+                <tr>
+                    <td class="reportBorder reportBackgroundColor reportColor virtical-align">Position</td>
+                    <td class="reportBorder reportBackgroundColor reportColor virtical-align">Name</td>
+                    <td class="reportBorder reportBackgroundColor reportColor virtical-align">Daily Salary</td>
+
+                    <td class="reportBorder reportBackgroundColor reportColor  virtical-align uk-table-expand">Name</td>
+                    <td class="reportBorder reportBackgroundColor reportColor virtical-align">Amount</td>
+                    <td class="reportBorder reportBackgroundColor reportColor virtical-align">Cost</td>
+                </tr>
+            </thead>
+            <tbody *ngFor="let arce of resultPlant">
+                <tr class="reportBorderOnly" *ngFor="let plant of arce.plansArray; let i = index" >
+                    <td class="virtical-align" *ngIf="i < 1" colspan="2" [attr.rowspan]="arce.plansArray.length">{{arce.arceCode}}</td>
+                        <td class="text-center">{{plant.planName}}</td>
+                        <td class="text-center">{{plant.planStartDate}}</td>
+                        <td class="text-center">{{plant.planEndDate}}</td>
+                        <td class="text-center">{{plant.planAmount}}</td>
+                        <td class="text-center">{{plant.planSellingPrice}}</td>
+                        <td class="text-center">{{plant.materialCost}}</td>
+                        <td class="text-center">{{plant.planSellingPrice - (plant.materialCost + plant.workersCost)}}</td>
+
+                        <td>
+                            <ul style="list-style: none; padding: 0;">
+                                <li *ngFor="let worker of plant.workersArray">
+                                    {{worker.title}}
+                                </li>
+                            </ul>
+                        </td>
+
+                        <td>
+                            <ul style="list-style: none; padding: 0;">
+                                <li *ngFor="let worker of plant.workersArray">
+                                    {{worker.name}}
+                                </li>
+                            </ul>
+                        </td>
+
+                        <td>
+                            <ul style="list-style: none; padding: 0;">
+                                <li *ngFor="let worker of plant.workersArray">
+                                    {{worker.salary_by_day}}
+                                </li>
+                            </ul>
+                        </td>
+
+
+                        <td style="white-space: nowrap;">
+                            <ul style="list-style: none; padding: 0;">
+                                <li *ngFor="let material of plant.materialArray">
+                                    {{material.name}}
+                                </li>
+                            </ul>
+                             </td>
+
+                        <td>
+                            <ul style="list-style: none; padding: 0;">
+                                <li *ngFor="let material of plant.materialArray">
+                                    {{material.amount}}
+                                </li>
+                            </ul>
+                        </td>
+
+                        <td>
+                            <ul style="list-style: none; padding: 0;">
+                                <li *ngFor="let material of plant.materialArray">
+                                    {{material.cost}}
+                                </li>
+                            </ul>
+                        </td>
+ 
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</section>

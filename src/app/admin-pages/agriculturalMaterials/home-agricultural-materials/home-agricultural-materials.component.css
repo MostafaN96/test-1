@@ -1,0 +1,26 @@
+.navbar{
+    border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+      font-family: "segoe ui light";
+      background-color:#fff !important;
+      border: solid 2px #263b42c7;
+      box-shadow: 0px 7px 5px -4px #253a42c7;
+  }
+  
+  .navbar-light .navbar-nav .nav-link {
+   color:#d34830 !important;
+   }
+   .navbar-light .navbar-nav .nav-link:hover{
+     color:  #263b42c7 !important;
+     }
+   .navbar ul li label
+   {
+     cursor: pointer;
+   }
+    
+   .nav-link
+   {
+     transition: all 0.4s;
+     font-size: 17px;
+   }
+    
